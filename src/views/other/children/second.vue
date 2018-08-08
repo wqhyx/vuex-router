@@ -189,6 +189,11 @@
           },//删除
           del:function(item){
             var result = this.items.filter(function(val){ return val.id != item.id});
+            for(var i = 0; i<result.length; i++){
+              if(item.id < result[i].id){
+                result[i].id -= 1;
+              }
+            }
             this.items = result;
           },//修改
           update:function(item){
