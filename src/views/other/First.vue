@@ -72,6 +72,7 @@
                  myvue.info = "用户名或密码错误!";
               }
             }).catch(function(error){
+              alert("请确保接口正常开启,异常信息状态:"+error.status);
               //回调错误信息
               console.log(error);
             });

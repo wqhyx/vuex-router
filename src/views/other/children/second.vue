@@ -201,6 +201,7 @@
                 console.log(error);
               });
             }else {
+              //不匹配进行回调
                myvue.$router.push({name:'first'});
             }
           })
