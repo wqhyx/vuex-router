@@ -1,6 +1,5 @@
-# hk
-
-> nothing
+# hk 
+##Vue全局路由配置加Bootstrap模板
 
 ## Build Setup
 
