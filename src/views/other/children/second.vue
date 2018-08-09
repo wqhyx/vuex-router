@@ -93,22 +93,22 @@
 
                     <div class="form-group" style="display:none;">
                       <label for="" class="pull-left">编号</label>
-                      <input type="text" id="id" class="form-control" v-model="item.id">
+                      <input type="text" id="id" class="form-control">
                     </div>
 
                     <div class="form-group">
                       <label for="" class="pull-left">书名</label>
-                      <input type="text" id="name" class="form-control" v-model="item.name">
+                      <input type="text" id="name" class="form-control">
                     </div>
 
                     <div class="form-group">
                       <label for="" class="pull-left">作者</label>
-                      <input type="text" id="author" class="form-control" v-model="item.author">
+                      <input type="text" id="author" class="form-control">
                     </div>
 
                     <div class="form-group">
                       <label for="" class="pull-left">价格</label>
-                      <input type="text" id="price" class="form-control" v-model="item.price">
+                      <input type="text" id="price" class="form-control">
                     </div>
 
                   </div>
@@ -195,7 +195,7 @@
               }
             }
             this.items = result;
-          },//修改
+          },//修改之前
           update:function(item){
             //console.log(item.id + item.name + item.author+item.price)
             $('#updatemodal').modal('show');
@@ -203,7 +203,7 @@
             $('#name').val(item.name);
             $('#author').val(item.author);
             $('#price').val(item.price);
-          },//修改
+          },//修改操作
           updateitem:function(items){
             var aid = $('#id').val();
             var aname = $('#name').val();
