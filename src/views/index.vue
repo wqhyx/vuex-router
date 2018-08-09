@@ -7,7 +7,7 @@
 <script>
     export default {
         data() {
-            return {msg: 'index'}
+            return {msg: 'Hello world'}
         }
     }
 </script>

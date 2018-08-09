@@ -179,32 +179,7 @@
                 password:'',
                 createdate:'',
               },
-              items:[
-                {
-                  id:'1',
-                  name:'红楼梦',
-                  author:'曹雪芹',
-                  price:'32.5'
-                },
-                {
-                  id:'2',
-                  name:'三国演义',
-                  author:'罗贯中',
-                  price:'68.0'
-                },
-                {
-                  id:'3',
-                  name:'水浒传',
-                  author:'施耐庵',
-                  price:'54.3'
-                },
-                {
-                  id:'4',
-                  name:'西游记',
-                  author:'吴承恩',
-                  price:'50.9'
-                }
-              ]
+              userinfo:myvue.$route.params,
             }
         },
         beforeCreate:function(){
@@ -213,15 +188,21 @@
         mounted:function(){
           myvue.$nextTick(function () {
 
-            myvue.$http.jsonp('http://localhost:8888/get',{emulateJSON: true }).then((response) => {
-              //获取数据
-              console.log(response.body);
-              myvue.datalist = response.body.datalist;
-            }).catch(function(error){
-              //回调错误信息
-              console.log(error);
-            });
-
+            myvue.datalist = '';
+            var username = myvue.userinfo.card_id;
+            if(username != null && username != "" && username != "undefined"){
+              //请求本地SpringBoot
+              myvue.$http.jsonp('http://localhost:8888/get',{emulateJSON: true }).then((response) => {
+                //获取数据
+                console.log(response.body);
+                myvue.datalist = response.body.datalist;
+              }).catch(function(error){
+                //回调错误信息
+                console.log(error);
+              });
+            }else {
+               myvue.$router.push({name:'first'});
+            }
           })
         },
         methods:{
