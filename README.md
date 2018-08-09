@@ -1,6 +1,7 @@
 # hk 
 ##Vue全局路由配置加Bootstrap模板
-
+#此项目与https://github.com/wqhyx/Spring_boot-jsp-freemarker-thymeleaf-
+#共同使用
 ## Build Setup
 
 ``` bash
