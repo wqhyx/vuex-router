@@ -4,8 +4,16 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import $ from 'jquery'
+//添加bootstrap样式以及js,
+import '@/lib/Bootstrap/css/bootstrap.css'
 import '@/lib/js/jquery-3.1.1.js'
 import '@/lib/js/bootstrap.min.js'
+import '@/lib/js/vue.js'
+import  VueResource from 'vue-resource'
+import Axios from 'axios'
+
+Vue.use(VueResource)
+Vue.use(Axios)
 
 Vue.config.productionTip = false
 

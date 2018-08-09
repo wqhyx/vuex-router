@@ -1,12 +1,10 @@
-<!-- 添加bootstrap样式 -->　
-<style src="@/lib/Bootstrap/css/bootstrap.css"></style>
 <!-- 添加vue的js -->
-<script src="http://static.runoob.com/assets/vue/1.0.11/vue.min.js"></script>
-<script src="http://static.runoob.com/code/js/vueapp.js"></script>
+<!--<script src="http://static.runoob.com/assets/vue/1.0.11/vue.min.js"></script>
+<script src="http://static.runoob.com/code/js/vueapp.js"></script>-->
 <template>
     <div>
       <div class="container">
-        <div class="col-md-8 col-md-offset-2">
+        <div class="col-md-24 col-md-offset-0">
           <h1>Vue + BootStrap</h1>
           <div id="demo">
             <table class="table table-hover">
@@ -16,28 +14,38 @@
               <thead>
               <tr>
                 <th>编号</th>
-                <th>书名</th>
-                <th>作者</th>
-                <th>价格</th>
+                <th>账号</th>
+                <th>名称</th>
+                <th>性别</th>
+                <th>密码</th>
+                <th>创建时间</th>
                 <th>操作</th>
               </tr>
               </thead>
               <tbody>
-              <tr v-for="item in items">
+              <tr v-for="item in datalist">
                 <td>{{item.id}}</td>
+                <td>{{item.cardid}}</td>
                 <td>{{item.name}}</td>
-                <td>{{item.author}}</td>
-                <td>{{item.price}}</td>
-                <template v-if="item.id % 2==0">
+                <td>{{item.sex}}</td>
+                <td>{{item.password}}</td>
+                <td>{{item.createdate}}</td>
+                <template v-if="item.sex == '女'">
                   <td>
                     <button class="btn btn-success btn-sm" @click="del(item)">删除</button>&nbsp;&nbsp;
                     <button class="btn btn-success btn-sm" @click="update(item)">修改</button>
                   </td>
                 </template>
-                <template v-else>
+                <template v-else-if="item.sex == '男'">
                   <td>
                     <button class="btn btn-info btn-sm" @click="del(item)">删除</button>&nbsp;&nbsp;
                     <button class="btn btn-info btn-sm" @click="update(item)">修改</button>
+                  </td>
+                </template>
+                <template v-else>
+                  <td>
+                    <button class="btn btn-primary btn-sm" @click="del(item)">删除</button>&nbsp;&nbsp;
+                    <button class="btn btn-primary btn-sm" @click="update(item)">修改</button>
                   </td>
                 </template>
               </tr>
@@ -48,7 +56,7 @@
             <!-- <form action="#" method="post"> -->
             <div class="modal fade" id="addmodal">
               <div class="modal-dialog">
-                <div class="modal-content" style="width: 420px;margin-left: 70px;margin-top: 85px;">
+                <div class="modal-content" style="width: 550px;margin-top: 100px;">
                   <div class="modal-header">
                     <button class="close" data-dismiss="modal"><span>&times;</span></button>
                     <h4 class="modal-title">添加信息</h4>
@@ -56,18 +64,28 @@
                   <div class="modal-body center" style="margin-left: 15px;font-size: 15px;">
 
                     <div class="form-group ">
-                      <label for="" class="pull-left">书名</label>
+                      <label for="" class="pull-left">账号</label>
+                      <input type="text"  class="form-control" v-model="item.cardid">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="" class="pull-left">名称</label>
                       <input type="text"  class="form-control" v-model="item.name">
                     </div>
 
                     <div class="form-group">
-                      <label for="" class="pull-left">作者</label>
-                      <input type="text"  class="form-control" v-model="item.author">
+                      <label for="" class="pull-left">性别</label>
+                      <input type="text"  class="form-control" v-model="item.sex">
                     </div>
 
                     <div class="form-group">
-                      <label for="" class="pull-left">价格</label>
-                      <input type="text"  class="form-control" v-model="item.price">
+                      <label for="" class="pull-left">密码</label>
+                      <input type="text"  class="form-control" v-model="item.password">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="" class="pull-left">创建时间</label>
+                      <input type="text"  class="form-control" v-model="item.createdate">
                     </div>
 
                   </div>
@@ -84,7 +102,7 @@
             <!-- <form action="#" method="post"> -->
             <div class="modal fade" id="updatemodal">
               <div class="modal-dialog">
-                <div class="modal-content" style="width: 420px;margin-left: 70px;margin-top: 85px;">
+                <div class="modal-content" style="width: 550px;margin-top: 100px;">
                   <div class="modal-header">
                     <button class="close" data-dismiss="modal"><span>&times;</span></button>
                     <h4 class="modal-title">修改信息</h4>
@@ -97,23 +115,33 @@
                     </div>
 
                     <div class="form-group">
-                      <label for="" class="pull-left">书名</label>
+                      <label for="" class="pull-left">账号</label>
+                      <input type="text" id="cardid" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="" class="pull-left">名称</label>
                       <input type="text" id="name" class="form-control">
                     </div>
 
                     <div class="form-group">
-                      <label for="" class="pull-left">作者</label>
-                      <input type="text" id="author" class="form-control">
+                      <label for="" class="pull-left">性别</label>
+                      <input type="text" id="sex" class="form-control">
                     </div>
 
                     <div class="form-group">
-                      <label for="" class="pull-left">价格</label>
-                      <input type="text" id="price" class="form-control">
+                      <label for="" class="pull-left">密码</label>
+                      <input type="text" id="password" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="" class="pull-left">创建时间</label>
+                      <input type="text" id="createdate" class="form-control">
                     </div>
 
                   </div>
                   <div class="modal-footer">
-                    <button class="btn btn-primary" v-on:click="updateitem(items)">修改</button>
+                    <button class="btn btn-primary" v-on:click="updateitem(datalist)">修改</button>
                     <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
                   </div>
                 </div>
@@ -138,14 +166,18 @@
 </style>
 
 <script>
+    var myvue = {};
     export default {
         data() {
             return {
+              datalist:'',
               item: {
                 id: 0,
-                author: '',
+                cardid: '',
                 name: '',
-                price: ''
+                sex: '',
+                password:'',
+                createdate:'',
               },
               items:[
                 {
@@ -175,52 +207,65 @@
               ]
             }
         },
+        beforeCreate:function(){
+          myvue = this;
+        },
+        mounted:function(){
+          myvue.$nextTick(function () {
+
+            myvue.$http.jsonp('http://localhost:8888/get',{emulateJSON: true }).then((response) => {
+              //获取数据
+              console.log(response.body);
+              myvue.datalist = response.body.datalist;
+            }).catch(function(error){
+              //回调错误信息
+              console.log(error);
+            });
+
+          })
+        },
         methods:{
           add:function(){
               $('#addmodal').modal('show');
           },//添加
           additem:function(){
-            this.item.id = this.items.length + 1;
-            this.items.push(this.item);
+            myvue.item.id = myvue.datalist.length + 1;
+            myvue.datalist.push(this.item);
             //将input中的数据重置
             this.item = {};
             //隐藏模态框
             $('#addmodal').modal('hide');
           },//删除
           del:function(item){
-            var result = this.items.filter(function(val){ return val.id != item.id});
+            var result = myvue.datalist.filter(function(val){ return val.id != item.id});
             for(var i = 0; i<result.length; i++){
               if(item.id < result[i].id){
                 result[i].id -= 1;
               }
             }
-            this.items = result;
+            myvue.datalist = result;
           },//修改之前
           update:function(item){
             //console.log(item.id + item.name + item.author+item.price)
             $('#updatemodal').modal('show');
             $('#id').val(item.id);
+            $('#cardid').val(item.cardid);
             $('#name').val(item.name);
-            $('#author').val(item.author);
-            $('#price').val(item.price);
+            $('#sex').val(item.sex);
+            $('#password').val(item.password);
+            $('#createdate').val(item.createdate);
           },//修改操作
-          updateitem:function(items){
-            var aid = $('#id').val();
-            var aname = $('#name').val();
-            var aauthor = $('#author').val();
-            var aprice = $('#price').val();
-            //console.log(items)
-            for(var i =0;i<items.length;i++){
-              //console.log(items[i].id)
-              if(items[i].id == aid){
+          updateitem:function(datalist){
+            for(var i =0;i<datalist.length;i++){
+              if(datalist[i].id == $('#id').val()){
                 //console.log('找到了对应的编号，正在替换数据!')
-                items[i].name = aname;
-                items[i].author = aauthor;
-                items[i].price = aprice;
+                datalist[i].name = $('#name').val();
+                datalist[i].cardid = $('#cardid').val();;
+                datalist[i].sex = $('#sex').val();
+                datalist[i].password = $('#password').val();
+                datalist[i].createdate = $('#createdate').val();
               }
             }
-            //将input中的数据重置
-            this.item = {};
             //关闭(隐藏)
             $('#updatemodal').modal('hide');
           }
