@@ -10,6 +10,11 @@ import '@/lib/js/jquery-3.1.1.js'
 import '@/lib/js/bootstrap.min.js'
 import '@/lib/js/vue.js'
 import  VueResource from 'vue-resource'
+
+//添加echarts依赖
+import echarts from 'echarts'
+Vue.prototype.$echarts = echarts;
+
 //import Axios from 'axios'
 
 Vue.use(VueResource)

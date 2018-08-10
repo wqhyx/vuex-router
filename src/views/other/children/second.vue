@@ -7,11 +7,12 @@
         <div class="col-md-24 col-md-offset-0">
           <h1>Vue + BootStrap</h1>
           <div id="demo">
-            <div style="width: 400px;text-align: left;">
+            <div style="width: 450px;text-align: left;">
               <span>当前用户：<span style="color:red;">{{showuser}}</span>,&nbsp;
                 <a @click="out" style="cursor: pointer;" title="点击退出当前用户">点击退出</a>
               </span>&nbsp;
               <span class="btn btn-warning btn-sm" @click="showinfo">查看当前用户</span>&nbsp;
+              <span class="btn btn-warning btn-sm" @click="showecharts">比例报表</span>&nbsp;
               <span class="btn btn-danger btn-sm" id="addbtn" @click="add">添加</span>
             </div>
             <table class="table table-hover">
@@ -55,6 +56,14 @@
               </tr>
               </tbody>
             </table>
+            <!--<div class="pull-right">
+              <ul class="pagination">
+                <li><a href="#">首页</a></li>
+                <li><a href="#">上一页</a></li>
+                <li><a href="#">下一页</a></li>　
+                <li><a href="#">尾页</a></li>
+              </ul>
+            </div>-->
 
             <!-- 添加 -->
             <!-- <form action="#" method="post"> -->
@@ -229,6 +238,11 @@
               },
               userinfo:localStorage.getItem("params"),
               showuser:'',
+              boy:0,
+              girl:0,
+              other:0,
+              barlist:[],
+              pielist:[],
             }
         },
         beforeCreate:function(){
@@ -251,6 +265,23 @@
                 //获取数据
                 console.log(response.body);
                 myvue.datalist = response.body.datalist;
+                var data = response.body.datalist;
+                data.forEach(function(v){　
+                  if(v.sex == '男'){
+                      myvue.boy++;
+                  }else if(v.sex == '女'){
+                      myvue.girl++;　
+                  }else{
+                      myvue.other++;　
+                  }
+                });
+                myvue.barlist.push(myvue.boy);
+                myvue.barlist.push(myvue.girl);
+                myvue.barlist.push(myvue.other);
+                var json={};json.value=myvue.boy;json.name='男';
+                var json1={};json1.value=myvue.girl;json1.name='女';
+                var json2={};json2.value=myvue.other;json2.name='其他';
+                myvue.pielist.push(json,json1,json2);
               }).catch(function(error){
                 //回调错误信息
                 console.log(error);
@@ -262,6 +293,14 @@
           })
         },
         methods:{
+          //比例报表
+          showecharts:function(){
+            //柱状图数据
+            localStorage.setItem("barlist",JSON.stringify(myvue.barlist));
+            //饼图
+            localStorage.setItem("pielist",JSON.stringify(myvue.pielist));
+            myvue.$router.push({name:'echarts'});
+          },
           //查看当前信息
           showinfo:function(){
               $("#showinfo").modal('show');
@@ -275,7 +314,9 @@
           //退出
           out:function(){
               //清除储存,然后回调
-            　localStorage.removeItem("params");
+            　/*localStorage.removeItem("params");
+              localStorage.removeItem("barlist");*/
+              localStorage.clear();
               myvue.$router.push({name:'first'});
           },//弹出添加模态框
           add:function(){
