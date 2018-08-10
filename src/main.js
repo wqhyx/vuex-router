@@ -10,10 +10,10 @@ import '@/lib/js/jquery-3.1.1.js'
 import '@/lib/js/bootstrap.min.js'
 import '@/lib/js/vue.js'
 import  VueResource from 'vue-resource'
-import Axios from 'axios'
+//import Axios from 'axios'
 
 Vue.use(VueResource)
-Vue.use(Axios)
+//Vue.http = Vue.prototype.$http = Axios;
 
 Vue.config.productionTip = false
 

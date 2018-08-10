@@ -24,7 +24,7 @@
             <div class="col-lg-10">
             </div>
             <div class="col-lg-10">
-              <button type="button" id="btn" @click="login" class="btn btn-success col-lg-12">
+              <button type="button" @keyup.enter="login" id="btn" @click="login" class="btn btn-success col-lg-12">
                 登录
               </button>
             </div>
@@ -57,26 +57,31 @@
         methods:{
           //登录方法
           login:function(){
-            //请求本地SpringBoot
-            myvue.$http.jsonp('http://localhost:8888/login?user='+myvue.uname+'&password='+myvue.upassword,{emulateJSON: true }).then((response) => {
-              //获取数据
-              console.log(response);
-              //成功
-              if(response.body.status == '0' || response.body.status == 0){　
-                  //console.log("成功");
-                  //带参跳转页面
-                  myvue.$router.push({name:'childenfirst',params:response.body.datalist});
-
-              }else{
-                 //失败提示
-                 myvue.info = "用户名或密码错误!";
-              }
-            }).catch(function(error){
-              alert("请确保接口正常开启,异常信息状态:"+error.status);
-              //回调错误信息
-              console.log(error);
-            });
-
+            if(myvue.uname == '' || myvue.upassword == ''){
+                //为空提示
+                myvue.info = "用户名和密码不能为空!";
+            }else {
+                //请求本地SpringBoot
+                myvue.$http.jsonp('http://localhost:8888/login?user=' + myvue.uname + '&password=' + myvue.upassword, {emulateJSON: true}).then((response) => {
+                  //获取数据
+                  console.log(response);
+                  //成功
+                  if (response.body.status == '0' || response.body.status == 0) {
+                    //console.log("成功");
+                    //带参跳转页面
+                    localStorage.setItem("params", JSON.stringify(response.body.datalist));
+                    myvue.$router.push({name: 'childenfirst'});
+                    //myvue.$router.push({name:'childenfirst',params:response.body.datalist});
+                  } else {
+                    //失败提示
+                    myvue.info = "用户名或密码错误!";
+                  }
+                }).catch(function (error) {
+                  alert("请确保接口正常开启,异常信息状态:" + error.status);
+                  //回调错误信息
+                  console.log(error);
+                });
+            }
           }
         }
     }

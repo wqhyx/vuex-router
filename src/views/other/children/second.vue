@@ -7,10 +7,14 @@
         <div class="col-md-24 col-md-offset-0">
           <h1>Vue + BootStrap</h1>
           <div id="demo">
+            <div style="width: 400px;text-align: left;">
+              <span>当前用户：<span style="color:red;">{{showuser}}</span>,&nbsp;
+                <a @click="out" style="cursor: pointer;" title="点击退出当前用户">点击退出</a>
+              </span>&nbsp;
+              <span class="btn btn-warning btn-sm" @click="showinfo">查看当前用户</span>&nbsp;
+              <span class="btn btn-danger btn-sm" id="addbtn" @click="add">添加</span>
+            </div>
             <table class="table table-hover">
-              <caption>
-                <button class="btn btn-danger btn-sm" id="addbtn" @click="add">添加</button>
-              </caption>
               <thead>
               <tr>
                 <th>编号</th>
@@ -32,20 +36,20 @@
                 <td>{{item.createdate}}</td>
                 <template v-if="item.sex == '女'">
                   <td>
-                    <button class="btn btn-success btn-sm" @click="del(item)">删除</button>&nbsp;&nbsp;
-                    <button class="btn btn-success btn-sm" @click="update(item)">修改</button>
+                    <span class="btn btn-success btn-sm" @click="del(item)">删除</span>&nbsp;&nbsp;
+                    <span class="btn btn-success btn-sm" @click="update(item)">修改</span>
                   </td>
                 </template>
                 <template v-else-if="item.sex == '男'">
                   <td>
-                    <button class="btn btn-info btn-sm" @click="del(item)">删除</button>&nbsp;&nbsp;
-                    <button class="btn btn-info btn-sm" @click="update(item)">修改</button>
+                    <span class="btn btn-info btn-sm" @click="del(item)">删除</span>&nbsp;&nbsp;
+                    <span class="btn btn-info btn-sm" @click="update(item)">修改</span>
                   </td>
                 </template>
                 <template v-else>
                   <td>
-                    <button class="btn btn-primary btn-sm" @click="del(item)">删除</button>&nbsp;&nbsp;
-                    <button class="btn btn-primary btn-sm" @click="update(item)">修改</button>
+                    <span class="btn btn-primary btn-sm" @click="del(item)">删除</span>&nbsp;&nbsp;
+                    <span class="btn btn-primary btn-sm" @click="update(item)">修改</span>
                   </td>
                 </template>
               </tr>
@@ -58,7 +62,7 @@
               <div class="modal-dialog">
                 <div class="modal-content" style="width: 550px;margin-top: 100px;">
                   <div class="modal-header">
-                    <button class="close" data-dismiss="modal"><span>&times;</span></button>
+                    <span class="close" data-dismiss="modal"><span>&times;</span></span>
                     <h4 class="modal-title">添加信息</h4>
                   </div>
                   <div class="modal-body center" style="margin-left: 15px;font-size: 15px;">
@@ -90,8 +94,8 @@
 
                   </div>
                   <div class="modal-footer">
-                    <button class="btn btn-primary" v-on:click="additem()">添加</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    <span class="btn btn-primary" v-on:click="additem()">添加</span>
+                    <span type="button" class="btn btn-primary" data-dismiss="modal">关闭</span>
                   </div>
                 </div>
               </div>
@@ -104,7 +108,7 @@
               <div class="modal-dialog">
                 <div class="modal-content" style="width: 550px;margin-top: 100px;">
                   <div class="modal-header">
-                    <button class="close" data-dismiss="modal"><span>&times;</span></button>
+                    <span class="close" data-dismiss="modal"><span>&times;</span></span>
                     <h4 class="modal-title">修改信息</h4>
                   </div>
                   <div class="modal-body center" style="margin-left: 15px;font-size: 15px;">
@@ -141,13 +145,57 @@
 
                   </div>
                   <div class="modal-footer">
-                    <button class="btn btn-primary" v-on:click="updateitem(datalist)">修改</button>
-                    <button type="button" class="btn btn-primary" data-dismiss="modal">关闭</button>
+                    <span class="btn btn-primary" v-on:click="updateitem(datalist)">修改</span>
+                    <span type="button" class="btn btn-primary" data-dismiss="modal">关闭</span>
                   </div>
                 </div>
               </div>
             </div>
             <!-- </form>  -->
+
+            <div class="modal fade" id="showinfo">
+              <div class="modal-dialog">
+                <div class="modal-content" style="width: 550px;margin-top: 100px;">
+                  <div class="modal-header">
+                    <span class="close" data-dismiss="modal"><span>&times;</span></span>
+                    <h4 class="modal-title">详细信息</h4>
+                  </div>
+                  <div class="modal-body center" style="margin-left: 15px;font-size: 15px;">
+
+                    <div class="form-group ">
+                      <label for="" class="pull-left">账号</label>
+                      <input type="text"  class="form-control" id="showcardid">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="" class="pull-left">名称</label>
+                      <input type="text"  class="form-control" id="showname">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="" class="pull-left">性别</label>
+                      <input type="text"  class="form-control" id="showsex">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="" class="pull-left">密码</label>
+                      <input type="text"  class="form-control" id="showpassword">
+                    </div>
+
+                    <div class="form-group">
+                      <label for="" class="pull-left">创建时间</label>
+                      <input type="text"  class="form-control" id="showcreatedate">
+                    </div>
+
+                  </div>
+                  <div class="modal-footer">
+                    <span type="button" class="btn btn-primary" data-dismiss="modal">关闭</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
           </div>
         </div>
       </div>
@@ -179,17 +227,24 @@
                 password:'',
                 createdate:'',
               },
-              userinfo:myvue.$route.params,
+              userinfo:localStorage.getItem("params"),
+              showuser:'',
             }
         },
         beforeCreate:function(){
           myvue = this;
         },
         mounted:function(){
-          myvue.$nextTick(function () {
-
+          myvue.$nextTick(function(){
             myvue.datalist = '';
-            var username = myvue.userinfo.card_id;
+            //由JSON字符串转换为JSON对象
+            var obj = eval('(' + myvue.userinfo + ')');
+            var username = '';
+            if(myvue.userinfo != null){
+              username = obj.card_id;
+            }
+            console.log(username);
+            myvue.showuser = username;
             if(username != null && username != "" && username != "undefined"){
               //请求本地SpringBoot
               myvue.$http.jsonp('http://localhost:8888/get',{emulateJSON: true }).then((response) => {
@@ -207,6 +262,22 @@
           })
         },
         methods:{
+          //查看当前信息
+          showinfo:function(){
+              $("#showinfo").modal('show');
+              var obj = eval('(' + myvue.userinfo + ')');
+              $("#showcardid").val(obj.card_id);
+              $("#showname").val(obj.name);
+              $("#showpassword").val(obj.password);
+              $("#showsex").val(obj.sex);
+              $("#showcreatedate").val(obj.createdate);
+          },
+          //退出
+          out:function(){
+              //清除储存,然后回调
+            　localStorage.removeItem("params");
+              myvue.$router.push({name:'first'});
+          },//弹出添加模态框
           add:function(){
               $('#addmodal').modal('show');
           },//添加
