@@ -15,8 +15,11 @@ import  VueResource from 'vue-resource'
 import echarts from 'echarts'
 Vue.prototype.$echarts = echarts;
 
-//import Axios from 'axios'
+//添加highcharts依赖
+import HighCharts from 'highcharts'
 
+
+//import Axios from 'axios'
 Vue.use(VueResource)
 //Vue.http = Vue.prototype.$http = Axios;
 

@@ -1,6 +1,7 @@
 import first from '@/views/other/First'
 import childenfirst from '@/views/other/children/second'
 import echarts from '@/views/other/children/echarts'
+import highcharts from '@/views/other/children/highcharts'
 
 export default [
   {
@@ -16,9 +17,15 @@ export default [
       component:childenfirst
   },
   {
-      /*报表*/
+      /*Echarts报表*/
       path:'/echarts',
       name:'echarts',
       component:echarts
+  },
+  {
+      /*Highcharts*/
+      path:'/highcharts',
+      name:'highcharts',
+      component:highcharts
   }
 ]
