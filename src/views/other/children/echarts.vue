@@ -3,7 +3,7 @@
       <div class="container">
           <div class="panel panel-default">
               <div class="panel-heading">
-                <h3 class="panel-title">Echarts比例报表</h3>
+                <h3 class="panel-title">Echarts报表</h3>
               </div>
               <div class="panel-body">
                   <div style="float: left;">
