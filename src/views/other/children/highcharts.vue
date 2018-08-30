@@ -2,6 +2,8 @@
   <div>
     <x-chart id="highcharts" class="high" :option="option"></x-chart>
     <x-chart id="high" class="high" :option="option1"></x-chart>
+    <x-chart id="highpie" class="high" :option="option2"></x-chart>
+    <div id="container" style="min-width:400px;height:400px"></div>
   </div>
 </template>
 <style>
@@ -14,6 +16,7 @@
 <script>
   // 导入chart组件
   var myvue = {};
+  import HighCharts from 'highcharts'
   import XChart from '@/components/chart'
   export default {
     data() {
@@ -128,6 +131,68 @@
             data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
           }]
         },
+        option2:{
+          chart: {
+            plotBackgroundColor: null,
+            plotBorderWidth: null,
+            plotShadow: false,
+            type: 'pie'
+          },
+          title: {
+            text: '2018年1月浏览器市场份额'
+          },
+          tooltip: {
+            pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          },
+          plotOptions: {
+            pie: {
+              allowPointSelect: true,
+              cursor: 'pointer',
+              dataLabels: {
+                enabled: true,
+                format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                style: {
+                  color: (HighCharts.theme && HighCharts.theme.contrastTextColor) || 'black'
+                }
+              }
+            }
+          },
+          series: [{
+            name: 'Brands',
+            colorByPoint: true,
+            data: [{
+              name: 'Chrome',
+              y: 61.41,
+              sliced: true,
+              selected: true
+            }, {
+              name: 'Internet Explorer',
+              y: 11.84
+            }, {
+              name: 'Firefox',
+              y: 10.85
+            }, {
+              name: 'Edge',
+              y: 4.67
+            }, {
+              name: 'Safari',
+              y: 4.18
+            }, {
+              name: 'Sogou Explorer',
+              y: 1.64
+            }, {
+              name: 'Opera',
+              y: 1.6
+            }, {
+              name: 'QQ',
+              y: 1.2
+            }, {
+              name: 'Other',
+              y: 2.61
+            }]
+          }]
+        }
+
       }
     },
     beforeCreate:function(){
