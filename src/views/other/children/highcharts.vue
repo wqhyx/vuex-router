@@ -204,6 +204,78 @@
         myvue.other.series = myvue.data;     //数据
         myvue.other.yAxis.title.text = '就业人数';   //数据
         myvue.option = myvue.other;
+
+        var data = [ {
+          "coursetype" : "妇科疾病",
+          "per" : "6.00%",
+          "course_type_id" : "0e3825fcb9294406883de6ad88902b67"
+        }, {
+          "coursetype" : "儿科疾病",
+          "per" : "2.00%",
+          "course_type_id" : "1383eb5470fd4831b1018d59e1b4e914"
+        }, {
+          "coursetype" : "普通感冒",
+          "per" : "6.00%",
+          "course_type_id" : "178b1bbbbf964a18956a9912c4ad2c51"
+        }, {
+          "coursetype" : "支气管哮喘",
+          "per" : "2.00%",
+          "course_type_id" : "33098532c4e844ecaeac9ff37556b0ef"
+        }, {
+          "coursetype" : "高效沟通",
+          "per" : "6.00%",
+          "course_type_id" : "45f92ea28f064508a7346b6df785fb79"
+        }, {
+          "coursetype" : "心脑血管疾病",
+          "per" : "22.00%",
+          "course_type_id" : "4e8c9eee6b844edf8cedaabad6f17bba"
+        }, {
+          "coursetype" : "内分泌系统及代谢性疾病",
+          "per" : "16.00%",
+          "course_type_id" : "8456b88c38ee4de488d8cf1cd1313e64"
+        }, {
+          "coursetype" : "呼吸系统疾病",
+          "per" : "14.00%",
+          "course_type_id" : "87009a1b5a1a42468886ddb19f3337b1"
+        }, {
+          "coursetype" : "高效沟通",
+          "per" : "4.00%",
+          "course_type_id" : "89594aa3b0e540ba9b9b773b2d175542"
+        }, {
+          "coursetype" : "医疗器械",
+          "per" : "10.00%",
+          "course_type_id" : "8e327581121d4ba182c8150d1d468e5e"
+        }, {
+          "coursetype" : "专业力",
+          "per" : "2.00%",
+          "course_type_id" : "9521ce3b398f4967b908a1c9623a45d7"
+        }, {
+          "coursetype" : "皮肤科疾病",
+          "per" : "2.00%",
+          "course_type_id" : "9ed9a86064374fdcbef538a8eafebedc"
+        }, {
+          "coursetype" : "补益药",
+          "per" : "2.00%",
+          "course_type_id" : "9fe53d535f03426ba193565f4724b0a5"
+        }, {
+          "coursetype" : "五官科疾病",
+          "per" : "6.00%",
+          "course_type_id" : "f7af65f8a96b401e95aa077348e09dc0"
+        } ];
+
+
+      var datalist = [];
+        for (var i = 0;i<data.length;i++){
+          var list = [];
+          list.push(data[i].coursetype.toString());
+          list.push(parseInt(data[i].per));
+          //console.log(data[i].coursetype);
+          datalist.push(list);
+        }
+        console.log(datalist);
+
+
+
     },
     components: {
       XChart
