@@ -194,7 +194,7 @@
                page: true, //开启分页
                loading:true,
                even:true,    ////开启隔行背景
-               toolbar: '#toolbarDemo',  //工具
+                toolbar: '#toolbarDemo',  //工具
                 totalRow: true,   //合计
                 //size:'sm',   //尺寸
                 /*limits:[10,20,30,50],
