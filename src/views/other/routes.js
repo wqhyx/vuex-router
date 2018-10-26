@@ -2,6 +2,7 @@ import first from '@/views/other/First'
 import childenfirst from '@/views/other/children/second'
 import echarts from '@/views/other/children/echarts'
 import highcharts from '@/views/other/children/highcharts'
+import lay from '@/views/other/layui/table'
 
 export default [
   {
@@ -27,5 +28,11 @@ export default [
       path:'/highcharts',
       name:'highcharts',
       component:highcharts
+  },
+  {
+    /*Layui*/
+    path:'/lay',
+    name:'lay',
+    component:lay
   }
 ]

@@ -9,7 +9,17 @@ import '@/lib/Bootstrap/css/bootstrap.css'
 import '@/lib/js/jquery-3.1.1.js'
 import '@/lib/js/bootstrap.min.js'
 import '@/lib/js/vue.js'
+
+//添加layui相关css以及js
+//import '@/lib/layui/css/layui.css'
+//提示：如果是采用非模块化方式,此处可换成：./layui/layui.all.js
+//import '@/lib/layui/layui.js'
+
+
 import  VueResource from 'vue-resource'
+//引入layui依赖
+/*import layer from 'vue-layer'
+Vue.prototype.$layer = layer;*/
 
 //添加echarts依赖
 import echarts from 'echarts'
