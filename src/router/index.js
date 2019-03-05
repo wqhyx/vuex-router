@@ -10,6 +10,7 @@ const merge = function () {
 
 // 引入模块路由　
 import otherRoutes from '@/views/other/routes';
+import componentRoutes from '@/views/Component/routes';
 
 // 全局路由
 let routes = [
@@ -21,7 +22,7 @@ let routes = [
 ];
 
 // 合并路由
-routes = merge(routes,otherRoutes);
+routes = merge(routes,otherRoutes,componentRoutes);
 
 const router = new Router({
   mode: 'history',
