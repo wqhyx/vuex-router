@@ -28,11 +28,11 @@ Vue.prototype.$echarts = echarts;
 //添加highcharts依赖
 import HighCharts from 'highcharts'
 
-
 //import Axios from 'axios'
 Vue.use(VueResource)
 //Vue.http = Vue.prototype.$http = Axios;
-
+/**引用一个新的vue页面*/
+//Vue.component("test",test);
 Vue.config.productionTip = false
 
 /* eslint-disable no-new */
