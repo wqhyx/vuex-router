@@ -10,6 +10,31 @@ import '@/lib/js/jquery-3.1.1.js'
 import '@/lib/js/bootstrap.min.js'
 import '@/lib/js/vue.js'
 
+/**自定义指令*/
+/*Vue.directive('rain',{
+  bind(el,binding,vnode){
+    el.style.color = "#"+Math.random().toString(16).slice(2,8);
+  }
+});*/
+/**全局 自定义指令*/
+Vue.directive('theme',{
+  bind(el,binding,vnode){
+    if(binding.value == 'other'){
+      el.style.maxWidth = "1260px";
+    }
+    if(binding.arg == 'column'){
+      el.style.backgroundColor = "aqua";
+      el.style.padding = "20px";
+    }
+  }
+})
+
+/**全局过滤器*/
+Vue.filter('toUpper',function(value){
+  return value.toUpperCase();
+})
+
+
 //添加layui相关css以及js
 //import '@/lib/layui/css/layui.css'
 //提示：如果是采用非模块化方式,此处可换成：./layui/layui.all.js
