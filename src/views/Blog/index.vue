@@ -7,10 +7,10 @@
       <!--<router-link to="/addblog">添加博客</router-link>-->
       <h1>博客总览</h1>
       <input type="text" v-model="search" placeholder="搜索">
-      <div class="single-blog" v-for="blog in filterserach">
-       <router-link v-bind:to="'/showSingleBlog/'+blog.id"><h2 v-rain >{{blog.id}}、{{blog.title | toUpper}}</h2></router-link>
+      <div class="single-blog" v-for="blog in filterserach" :key="blog">
+       <router-link v-bind:to="'/showSingleBlog/'+blog.id"><h2 v-rain >{{blog.title | toUpper}}</h2></router-link>
         <article>
-          {{blog.body | jqlength}}
+          {{blog.content | jqlength}}
         </article>
       </div>
     </div>
@@ -55,12 +55,18 @@
       myvue = this;
     }, created() {
       /**请求本地json数据*/
-      myvue.$http.get("/static/json/posts.json").then(rep => {
+      /**使用 野狗  https://www.wilddog.com 在线添加数据*/
+      myvue.$http.get("https://wd6227691035otnqqd.wilddogio.com/posts.json").then(rep => {
         /**在线调用接口，返回数据!*/
         //myvue.$http.get("http://jsonplaceholder.typicode.com/posts").then(rep=>{
         /**只要十条数据*/
-        myvue.blogs = rep.body.splice(0, 10);
-        console.log(myvue.blogs);
+        //myvue.blogs = rep.body.splice(0, 10);
+        var data = rep.data;
+        for(let key in data){
+          data[key].id = key;
+          //console.log(data[key]);
+          myvue.blogs.push(data[key])
+        }
       }, err => {
         console.log(err);
       });
@@ -78,6 +84,8 @@
         if (!value) return;
         if (value.toString().length > 120) {
           return value.toString().substring(0, 120) + "...";
+        }else{
+          return value;
         }
       }
     }, computed: {

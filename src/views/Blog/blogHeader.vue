@@ -4,7 +4,7 @@
       <li>
         <!--exact 关键字 去active-->
         <router-link to="/indexvue" exact><strong>博客</strong></router-link>
-        <router-link to="/addblog" exact ><steddrong>写博客</steddrong></router-link>
+        <router-link to="/addblog" exact ><strong>写博客</strong></router-link>
       </li>
     </ul>
   </nav>

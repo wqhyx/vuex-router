@@ -27,7 +27,7 @@
 
         <label>作者：</label>
         <select v-model="blog.choseauthor">
-          <option v-for="(author,index) in blog.author">
+          <option v-for="(author,index) in author">
             {{author}}
           </option>
         </select>
@@ -104,24 +104,22 @@
           title: '',   //标题
           content: '', //内容
           checkchose: [],  //分类
-          author: ["jack", "tom", "apache", "pathop", "gateway"],  //作者
           choseauthor: "",
-        }
+        },
+        author: ["jack", "tom", "apache", "pathop", "gateway"]  //作者
       }
     }, methods: {
       /**添加博客*/
       addBlog() {
-        myvue.$http.post("http://jsonplaceholder.typicode.com/posts", {
-          "username": myvue.blog.choseauthor,
-          "id": 1,
-          "title": myvue.blog.title,
-          "body": myvue.blog.content,
-          "like": myvue.blog.checkchose.join(",")
-        }).then(rep => {
+        /**使用 野狗  https://www.wilddog.com 在线添加数据*/
+        myvue.$http.post("https://wd6227691035otnqqd.wilddogio.com/posts.json",this.blog).then(rep => {
           console.log(rep);
           if (rep.ok == true) {
-            alert('成功!');
+            //alert('添加成功!');
+            this.$router.push({path:'/indexvue'});
+            return;
           }
+          alert('添加失败!');
         }, err => {
           console.log(err);
         })
