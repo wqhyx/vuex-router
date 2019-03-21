@@ -5,8 +5,14 @@
       <div class="single-blog">
         <h2>{{blog.title}}</h2>
         <article>
-          {{blog.body}}
+          内容:{{blog.content}}<br>
+          作者:{{blog.choseauthor | isNull}}
         </article>
+        <ul>
+          <li v-for="(singleblog,key) in blog.checkchose" :key="key">
+            {{singleblog}}
+          </li>
+        </ul>
       </div>
     </div>
 </template>
@@ -35,15 +41,20 @@
               blog:{}
             }
         },created(){
-          console.log(this.id);
-          this.$http.get('http://jsonplaceholder.typicode.com/posts/'+this.id).then(rep=>{
-            console.log(rep);
+          //console.log(this.id);
+          this.$http.get('https://wd6227691035otnqqd.wilddogio.com/posts/'+this.id+".json").then(rep=>{
+            //console.log('回调',rep);
             this.blog = rep.body;
           },err=>{
             console.log(err);
           })
         },components:{
           "bloghead":showblog
+        },filters:{
+          isNull(val){
+            if(!val) return "暂无";
+            else return val;
+          }
         }
     }
 </script>

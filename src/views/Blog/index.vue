@@ -7,11 +7,20 @@
       <!--<router-link to="/addblog">添加博客</router-link>-->
       <h1>博客总览</h1>
       <input type="text" v-model="search" placeholder="搜索">
-      <div class="single-blog" v-for="blog in filterserach" :key="blog">
-       <router-link v-bind:to="'/showSingleBlog/'+blog.id"><h2 v-rain >{{blog.title | toUpper}}</h2></router-link>
-        <article>
-          {{blog.content | jqlength}}
-        </article>
+      <div class="single-blog" v-for="(blog,key,index) in filterserach" :key="key">
+        <div style="box-sizing: border-box;width: 85%;float: left;">
+          <router-link v-bind:to="'/showSingleBlog/'+blog.id"><h2 v-rain title="查看详情">{{blog.title | toUpper}}</h2></router-link>
+          <article>
+            {{blog.content | jqlength}}
+          </article>
+        </div>
+        <div class="edit" style="box-sizing: border-box;width: 15%;float: left;line-height:90px;">
+            <button class="btn btn-info">
+              <router-link v-bind:to="'/updateSingleBlog/'+blog.id">
+                <span style="color: white;">修改</span></router-link>
+            </button>
+            <button class="btn btn-danger" @click.prevent="delBlog(blog)">删除</button>
+        </div>
       </div>
     </div>
   </div>
@@ -29,6 +38,7 @@
     background: #f1ebeb;
     box-sizing: border-box;
     border: 1px dotted #aaa;
+    height: 120px;
   }
   #show-blog a{
     text-decoration: none;
@@ -38,12 +48,15 @@
     width: 100%;
     box-sizing: border-box;
   }
+  .edit button:first-child{
+    margin-left: 40px;
+  }
 </style>
 
 <script>
   var myvue = {};
   import showblog from '@/views/Blog/blogHeader.vue'
-
+  import {mapMutations,mapActions,mapGetters} from "vuex";
   export default {
     data() {
       return {
@@ -54,26 +67,56 @@
     }, beforeCreate() {
       myvue = this;
     }, created() {
-      /**请求本地json数据*/
-      /**使用 野狗  https://www.wilddog.com 在线添加数据*/
-      myvue.$http.get("https://wd6227691035otnqqd.wilddogio.com/posts.json").then(rep => {
-        /**在线调用接口，返回数据!*/
-        //myvue.$http.get("http://jsonplaceholder.typicode.com/posts").then(rep=>{
-        /**只要十条数据*/
-        //myvue.blogs = rep.body.splice(0, 10);
-        var data = rep.data;
-        for(let key in data){
-          data[key].id = key;
-          //console.log(data[key]);
-          myvue.blogs.push(data[key])
-        }
-      }, err => {
-        console.log(err);
-      });
-    }, methods: {},
+      myvue.$options.methods.showBlog();
+    },methods:{
+      ...mapActions(['setlist','setname']),
+      ...mapGetters(["resultlist"]),
+      showBlog(){
+        myvue.blogs.splice(0,myvue.blogs.length);
+        /**请求本地json数据*/
+        /**使用 野狗  https://www.wilddog.com 在线添加数据*/
+        myvue.$http.get("https://wd6227691035otnqqd.wilddogio.com/posts.json").then(rep => {
+          /**在线调用接口，返回数据!*/
+          //myvue.$http.get("http://jsonplaceholder.typicode.com/posts").then(rep=>{
+          /**只要十条数据*/
+            //myvue.blogs = rep.body.splice(0, 10);
+          var data = rep.data;
+          for(let key in data){
+            data[key].id = key;
+            //console.log(data[key]);
+            myvue.blogs.push(data[key])
+          }
+        }, err => {
+          console.log(err);
+        });
+      },
+      delBlog(params){
+        /**删除*/
+        myvue.$http.delete("https://wd6227691035otnqqd.wilddogio.com/posts/"+params.id+".json").then(rep=>{
+          //console.log(rep);
+          if (rep.ok == true) {
+            //alert("删除失败!");
+            /**重新查询数据*/
+            this.showBlog();
+            return;
+          }
+          alert("删除失败!");
+        },error=>{
+          console.log(error);
+        });
+      }
+    },
     mounted() {
-    }
-    , filters: {
+      /**调用公共方法*/
+      //var resultVal = this.isNull('你好','123');
+      /** store */
+      //myvue.setlist(myvue.blogs);
+      ///console.log(myvue.$store.state.lists);
+    },watch:{
+      resultlist(val){
+        console.log("change this value,{}",val);
+      }
+    },filters: {
       /**指定过滤*/
       /*toUpper(value){
         if(!value) return;
@@ -105,7 +148,7 @@
       }
     }, components: {
       showblog
-    }
+    },
 
   }
 </script>
