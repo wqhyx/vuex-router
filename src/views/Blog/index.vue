@@ -9,17 +9,18 @@
       <input type="text" v-model="search" placeholder="搜索">
       <div class="single-blog" v-for="(blog,key,index) in filterserach" :key="key">
         <div style="box-sizing: border-box;width: 85%;float: left;">
-          <router-link v-bind:to="'/showSingleBlog/'+blog.id"><h2 v-rain title="查看详情">{{blog.title | toUpper}}</h2></router-link>
+          <router-link v-bind:to="'/showSingleBlog/'+blog.id"><h2 v-rain title="查看详情">{{blog.title | toUpper}}</h2>
+          </router-link>
           <article>
             {{blog.content | jqlength}}
           </article>
         </div>
         <div class="edit" style="box-sizing: border-box;width: 15%;float: left;line-height:90px;">
-            <button class="btn btn-info">
-              <router-link v-bind:to="'/updateSingleBlog/'+blog.id">
-                <span style="color: white;">修改</span></router-link>
-            </button>
-            <button class="btn btn-danger" @click.prevent="delBlog(blog)">删除</button>
+          <button class="btn btn-info">
+            <router-link v-bind:to="'/updateSingleBlog/'+blog.id">
+              <span style="color: white;">修改</span></router-link>
+          </button>&nbsp;&nbsp;&nbsp;
+          <button class="btn btn-danger" @click.prevent="delBlog(blog)">删除</button>
         </div>
       </div>
     </div>
@@ -40,15 +41,18 @@
     border: 1px dotted #aaa;
     height: 120px;
   }
-  #show-blog a{
+
+  #show-blog a {
     text-decoration: none;
   }
-  input[type='text']{
+
+  input[type='text'] {
     padding: 8px;
     width: 100%;
     box-sizing: border-box;
   }
-  .edit button:first-child{
+
+  .edit button:first-child {
     margin-left: 40px;
   }
 </style>
@@ -56,7 +60,8 @@
 <script>
   var myvue = {};
   import showblog from '@/views/Blog/blogHeader.vue'
-  import {mapMutations,mapActions,mapGetters} from "vuex";
+  import {mapMutations, mapActions, mapGetters} from "vuex";
+
   export default {
     data() {
       return {
@@ -68,11 +73,11 @@
       myvue = this;
     }, created() {
       myvue.$options.methods.showBlog();
-    },methods:{
-      ...mapActions(['setlist','setname']),
+    }, methods: {
+      ...mapActions(['setlist', 'setname']),
       ...mapGetters(["resultlist"]),
-      showBlog(){
-        myvue.blogs.splice(0,myvue.blogs.length);
+      showBlog() {
+        myvue.blogs.splice(0, myvue.blogs.length);
         /**请求本地json数据*/
         /**使用 野狗  https://www.wilddog.com 在线添加数据*/
         myvue.$http.get("https://wd6227691035otnqqd.wilddogio.com/posts.json").then(rep => {
@@ -81,7 +86,7 @@
           /**只要十条数据*/
             //myvue.blogs = rep.body.splice(0, 10);
           var data = rep.data;
-          for(let key in data){
+          for (let key in data) {
             data[key].id = key;
             //console.log(data[key]);
             myvue.blogs.push(data[key])
@@ -90,9 +95,9 @@
           console.log(err);
         });
       },
-      delBlog(params){
+      delBlog(params) {
         /**删除*/
-        myvue.$http.delete("https://wd6227691035otnqqd.wilddogio.com/posts/"+params.id+".json").then(rep=>{
+        myvue.$http.delete("https://wd6227691035otnqqd.wilddogio.com/posts/" + params.id + ".json").then(rep => {
           //console.log(rep);
           if (rep.ok == true) {
             //alert("删除失败!");
@@ -101,7 +106,7 @@
             return;
           }
           alert("删除失败!");
-        },error=>{
+        }, error => {
           console.log(error);
         });
       }
@@ -112,11 +117,11 @@
       /** store */
       //myvue.setlist(myvue.blogs);
       ///console.log(myvue.$store.state.lists);
-    },watch:{
-      resultlist(val){
-        console.log("change this value,{}",val);
+    }, watch: {
+      resultlist(val) {
+        console.log("change this value,{}", val);
       }
-    },filters: {
+    }, filters: {
       /**指定过滤*/
       /*toUpper(value){
         if(!value) return;
@@ -127,7 +132,7 @@
         if (!value) return;
         if (value.toString().length > 120) {
           return value.toString().substring(0, 120) + "...";
-        }else{
+        } else {
           return value;
         }
       }
