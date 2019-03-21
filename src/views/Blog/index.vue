@@ -61,6 +61,7 @@
   var myvue = {};
   import showblog from '@/views/Blog/blogHeader.vue'
   import {mapMutations, mapActions, mapGetters} from "vuex";
+  import Axios from '@/util/axios-auth.js'
 
   export default {
     data() {
@@ -80,7 +81,8 @@
         myvue.blogs.splice(0, myvue.blogs.length);
         /**请求本地json数据*/
         /**使用 野狗  https://www.wilddog.com 在线添加数据*/
-        myvue.$http.get("https://wd6227691035otnqqd.wilddogio.com/posts.json").then(rep => {
+        /*myvue.$http.get("https://wd6227691035otnqqd.wilddogio.com/posts.json").then(rep => {*/
+        Axios.get("/posts.json").then(rep => {
           /**在线调用接口，返回数据!*/
           //myvue.$http.get("http://jsonplaceholder.typicode.com/posts").then(rep=>{
           /**只要十条数据*/
