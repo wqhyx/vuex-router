@@ -11,6 +11,10 @@ import '@/lib/js/jquery-3.1.1.js'
 import '@/lib/js/bootstrap.min.js'
 import '@/lib/js/vue.js'
 
+import publicMethods from './util/publicMethods.js'
+
+Vue.use(publicMethods);
+
 /**自定义指令*/
 /*Vue.directive('rain',{
   bind(el,binding,vnode){
