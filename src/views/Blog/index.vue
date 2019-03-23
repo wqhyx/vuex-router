@@ -62,7 +62,6 @@
   import showblog from '@/views/Blog/blogHeader.vue'
   import {mapMutations, mapActions, mapGetters} from "vuex";
   /*import Axios from '@/util/axios-auth.js'*/
-  //import Axios from '@/util/axios-auth.js'
   import axios from 'axios';
 
   export default {
