@@ -61,7 +61,9 @@
   var myvue = {};
   import showblog from '@/views/Blog/blogHeader.vue'
   import {mapMutations, mapActions, mapGetters} from "vuex";
-  import Axios from '@/util/axios-auth.js'
+  /*import Axios from '@/util/axios-auth.js'*/
+  //import Axios from '@/util/axios-auth.js'
+  import axios from 'axios';
 
   export default {
     data() {
@@ -82,7 +84,7 @@
         /**请求本地json数据*/
         /**使用 野狗  https://www.wilddog.com 在线添加数据*/
         /*myvue.$http.get("https://wd6227691035otnqqd.wilddogio.com/posts.json").then(rep => {*/
-        Axios.get("/posts.json").then(rep => {
+        axios.get("/api/posts.json").then(rep => {
           /**在线调用接口，返回数据!*/
           //myvue.$http.get("http://jsonplaceholder.typicode.com/posts").then(rep=>{
           /**只要十条数据*/
@@ -96,6 +98,34 @@
         }, err => {
           console.log(err);
         });
+
+        /** vue浏览器跨域问题及解决办法  http://www.thenewstep.cn/*/
+        // 1.fetch
+        /*fetch("/api/test/testToken.php",{
+          "method":"POST",
+          headers:{
+            "Content-type":"application/json;",
+            token:"f4c902c9ae5a2a9d8f84868ad064e706"
+          },
+          body:JSON.stringify({"username":"jack","password":"123456"})
+        }).then(rep=>{
+          return rep.json();
+        }).then(data=>{
+          console.log(data);
+        }).catch(rep=>{
+          console.log('failed', rep);
+        });*/
+
+        //2.axios 详情请看 main.js
+        /*myvue.$axios.post("/api/test/testToken.php",{"username":"jack","password":"123456"}).then(rep=>{
+          console.log(rep);
+          return rep.json();
+        }).then(rep=>{
+          console.log(rep);
+        }).catch(rep=>{
+          console.log('failed', rep);
+        });*/
+
       },
       delBlog(params) {
         /**删除*/

@@ -9,7 +9,19 @@ module.exports = {
     // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: {
+        '/api': {
+          /** 接口域名*/
+          //  https://wd6227691035otnqqd.wilddogio.com
+          //  http://www.thenewstep.cn/
+          target: 'https://wd6227691035otnqqd.wilddogio.com',
+          /** 是否跨域*/
+          changeOrigin:true,
+          pathRewrite: {
+            '^/api': ''
+          }
+        }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST

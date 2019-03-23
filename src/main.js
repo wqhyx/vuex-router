@@ -60,7 +60,13 @@ import HighCharts from 'highcharts'
 
 Vue.use(VueResource)
 
-//Vue.http = Vue.prototype.$http = Axios;
+import axios from 'axios'
+axios.defaults.headers.common["token"]="f4c902c9ae5a2a9d8f84868ad064e706";
+axios.defaults.headers.post["Content-type"]="application/json";
+Vue.prototype.$axios = axios;
+
+//Vue.http = Vue.prototype.$http = axios;
+
 /**引用一个新的vue页面*/
 //Vue.component("test",test);
 Vue.config.productionTip = false
